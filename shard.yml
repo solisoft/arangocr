@@ -1,0 +1,13 @@
+name: arangocr
+version: 0.1.0
+
+authors:
+  - Olivier BONNAURE <olivier@solisoft.net>
+
+targets:
+  arangocr:
+    main: src/arangocr.cr
+
+crystal: 0.21.1
+
+license: MIT
