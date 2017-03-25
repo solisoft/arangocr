@@ -4,7 +4,7 @@ This library provides binding for ArangoDB HTTP interface
 
 ## Status
 
-beta
+alpha
 
 ## Requirements
 
