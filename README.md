@@ -1,27 +1,69 @@
-# arangocr
+# Arangocr
 
-TODO: Write a description here
+This library provides binding for ArangoDB HTTP interface
+
+## Status
+
+beta
+
+## Requirements
+
+* Crystal language version 0.20 and higher
 
 ## Installation
 
-TODO: Write installation instructions here
+Add this to your application's `shard.yml`
+
+````
+arango:
+  github: solisoft/arangocr
+  branch: master
+````
 
 ## Usage
 
-TODO: Write usage instructions here
+````
+require "arango"
 
-## Development
+client = Arango::Client.new("http://127.0.0.1:8529", "root", "", "mydatabase")
+database = client.database
 
-TODO: Write development instructions here
+puts "All Databases"
+puts "-------------"
+puts database.all
 
-## Contributing
+puts "\nCurrent Database"
+puts "------------------"
+puts database.current
 
-1. Fork it ( https://github.com/[your-github-name]/arangocr/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create a new Pull Request
+puts "\nCreate Database demoXYZ-123456789"
+puts "-----------------------------------"
+puts database.create({"name" => "demoXYZ-123456789"})
 
-## Contributors
+puts "\nDelete Database demoXYZ-123456789"
+puts "-----------------------------------"
+puts database.delete("demoXYZ-123456789")
 
-- [[your-github-name]](https://github.com/[your-github-name]) Olivier BONNAURE - creator, maintainer
+collection = client.collection
+puts "\nCreate collection demo"
+puts "------------------------"
+puts collection.create({"name" => "demo"})
+
+puts "\nTruncate collection demo"
+puts "--------------------------"
+puts collection.truncate("demo")
+
+puts "\nDelete collection demo"
+puts "------------------------"
+puts collection.delete("demo")
+````
+
+## Todos
+
+* Add more samples about documents
+* Add more samples about AQL cursors
+* Add tests
+
+## Licence
+
+MIT clause
