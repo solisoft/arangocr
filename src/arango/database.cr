@@ -22,4 +22,12 @@ class Arango::Database
   def delete(name : String)
     @client.delete("/_api/database/#{name}")
   end
+
+  def [](name)
+    collection(name)
+  end
+
+  def collection(name)
+    Collection.new(@client, @database, name)
+  end
 end

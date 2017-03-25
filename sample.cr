@@ -18,15 +18,15 @@ puts "\nDelete Database demoXYZ-123456789"
 puts "-----------------------------------"
 puts database.delete("demoXYZ-123456789")
 
-collection = client.collection
+demo = database.collection("demo")
 puts "\nCreate collection demo"
 puts "------------------------"
-puts collection.create({"name" => "demo"})
+puts demo.create({"name" => "demo"})
 
 puts "\nTruncate collection demo"
 puts "--------------------------"
-puts collection.truncate("demo")
+puts demo.truncate("demo")
 
 puts "\nDelete collection demo"
 puts "------------------------"
-puts collection.delete("demo")
+puts demo.delete("demo")

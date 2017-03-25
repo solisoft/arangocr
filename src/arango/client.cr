@@ -19,10 +19,6 @@ class Arango::Client
     Database.new(self, @database)
   end
 
-  def collection
-    Collection.new(self, @database)
-  end
-
   def get(url : String)
     response = @http.get(
       url,
