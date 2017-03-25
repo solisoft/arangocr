@@ -14,7 +14,7 @@ alpha
 
 Add this to your application's `shard.yml`
 
-````
+````yaml
 arango:
   github: solisoft/arangocr
   branch: master
@@ -22,7 +22,7 @@ arango:
 
 ## Usage
 
-````
+````crystal
 require "arango"
 
 client = Arango::Client.new("http://127.0.0.1:8529", "root", "", "mydatabase")
