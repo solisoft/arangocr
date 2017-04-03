@@ -30,4 +30,8 @@ class Arango::Database
   def collection(name)
     Collection.new(@client, @database, name)
   end
+
+  def aql
+    Aql.new(@client, @database)
+  end
 end
