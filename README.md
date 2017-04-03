@@ -50,9 +50,6 @@ data = [] of Hash(String, String)
 end
 demo.document.create(data)
 
-puts "\nRead all Keys"
-demo.all_keys
-
 puts "\nRun AQL query (cursor)"
 aql = database.aql
 cursor = aql.cursor({"query" => "FOR d IN demo RETURN d"})
@@ -61,6 +58,8 @@ while (cursor["hasMore"] == true)
   cursor = aql.next(cursor["id"].to_s)
   puts cursor["result"].size
 end
+
+puts aql.cursor({"query" => "FOR d IN demo LIMIT 5 RETURN
 
 puts "\nTruncate collection demo"
 puts demo.truncate
@@ -91,10 +90,12 @@ Create collection demo
 Insert one document
 [{"_id":"demo/59683050","_key":"59683050","_rev":"_UxElb9y---"},{"_id":"demo/59683054","_key":"59683054","_rev":"_UxElb9y--_"}]
 
-Read all Keys
-
 Run AQL query (cursor)
-{"result":[{"_key":"59683050","_id":"demo/59683050","_rev":"_UxElb9y---","fn":"Olivier","ln":"BONNAURE"},{"_key":"59683054","_id":"demo/59683054","_rev":"_UxElb9y--_","fn":"Sophie","ln":"BONNAURE"}],"hasMore":false,"cached":false,"extra":{"stats":{"writesExecuted":0,"writesIgnored":0,"scannedFull":2,"scannedIndex":0,"filtered":0,"executionTime":1.590251922607422e-4},"warnings":[]},"error":false,"code":201}
+
+1000 (100 times)
+
+{"result" => [{"_key" => "63378131", "_id" => "demo/63378131", "_rev" => "_UxGeQS2-_K", "fn" => "82202 Olivier", "ln" => "82202 BONNAURE"}, {"_key" => "63393430", "_id" => "demo/63393430", "_rev" => "_UxGeQVy-_R", "fn" => "89851 Olivier", "ln" => "89851 BONNAURE"}, {"_key" => "63270353", "_id" => "demo/63270353", "_rev" => "_UxGeP9S--m", "fn" => "28313 Olivier", "ln" => "28313 BONNAURE"}, {"_key" => "63299611", "_id" => "demo/63299611", "_rev" => "_UxGeQCm--f", "fn" => "42942 Olivier", "ln" => "42942 BONNAURE"}, {"_key" => "63370085", "_id" => "demo/63370085", "_rev" => "_UxGeQRG-_W", "fn" => "78179 Olivier", "ln" => "78179 BONNAURE"}], "hasMore" => false, "cached" => false, "extra" => {"stats" => {"writesExecuted" => 0, "writesIgnored" => 0, "scannedFull" => 5, "scannedIndex" => 0, "filtered" => 0, "executionTime" => 0.00014805793762207029}, "warnings" => []}, "error" => false, "code" => 201}
+
 
 Truncate collection demo
 {"id" => "59683047", "name" => "demo", "isSystem" => false, "status" => 3, "type" => 2, "error" => false, "code" => 200}

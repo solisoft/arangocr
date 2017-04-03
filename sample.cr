@@ -37,6 +37,8 @@ while (cursor["hasMore"] == true)
   puts cursor["result"].size
 end
 
+puts aql.cursor({"query" => "FOR d IN demo LIMIT 5 RETURN d"})
+
 puts "\nTruncate collection demo"
 puts demo.truncate
 
