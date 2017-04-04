@@ -15,7 +15,7 @@ alpha
 Add this to your application's `shard.yml`
 
 ````yaml
-arango:
+arangocr:
   github: solisoft/arangocr
   branch: master
 ````

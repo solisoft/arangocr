@@ -15,6 +15,17 @@ class Arango::Aql
     @client.put("/_db/#{@database}/_api/cursor/#{id}", {} of String => String)
   end
 
+  def all(body : Hash)
+    data = [] of JSON::Any
+    c = self.cursor(body)
+    data.push(c["result"]).flatten
+    while c["hasMore"] == true
+      c = self.next(c["id"].to_s)
+      c["result"].each { |r| data.push(r) }
+    end
+    data.flatten
+  end
+
   def clear_cache
     @client.delete("/_db/#{@database}/_api/query-cache")
   end
