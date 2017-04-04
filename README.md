@@ -23,7 +23,7 @@ arangocr:
 ## Usage
 
 ````crystal
-require "arango"
+require "arangocr"
 
 client = Arango::Client.new("http://127.0.0.1:8529", "root", "", "demo")
 database = client.database
