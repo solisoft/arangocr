@@ -13,6 +13,8 @@ class Arango::Client
     )
     if response.status_code == 200
       @jwt = JSON.parse(response.body)["jwt"].to_s
+    elsif response.status_code == 404
+      puts "Warning! It looks like you are using a passwordless configuration!"
     else
       puts "Error #{response.status_code} #{response.status_message}"
     end
