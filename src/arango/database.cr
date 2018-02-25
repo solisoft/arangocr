@@ -36,4 +36,8 @@ class Arango::Database
   def aql
     Aql.new(@client, @database)
   end
+
+  def transaction
+    Transaction.new(@client, @database)
+  end
 end

@@ -34,6 +34,10 @@ end
 
 puts aql.cursor({"query" => "FOR d IN demo LIMIT 5 RETURN d"})
 
+puts "\nTransaction"
+puts database.transaction.execute({"collections" => {"write" => "demo"},
+                                   "action"      => "function () { var db = require('@arangodb').db; db.demo.save({});  return db.demo.count(); }"})
+
 puts "\nTruncate collection demo"
 puts demo.truncate
 

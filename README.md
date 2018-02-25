@@ -60,6 +60,11 @@ end
 
 puts aql.cursor({"query" => "FOR d IN demo LIMIT 5 RETURN d"})
 
+puts "\nTransaction"
+puts database.transaction.execute({"collections" => {"write" => "demo"},
+                                   "action"      => "function () { var db = require('@arangodb').db; db.demo.save({});  return db.demo.count(); }"})
+
+
 puts "\nTruncate collection demo"
 puts demo.truncate
 
@@ -73,38 +78,30 @@ puts database.delete
 
 Will provide this output
 ````
-All Databases
-{"result" => ["_system", "akelpri", "anonsotop", "batitel", "bloggy", "cms_cms", "dc", "defycards", "demo", "dsn", "eshop", "jwtdemo", "mydemo", "plugandwork", "rce", "renault", "thebrane", "time"], "error" => false, "code" => 200}
-
 Current Database
-{"result" => {"name" => "demo", "id" => "1315548", "path" => "/usr/local/var/lib/arangodb3/databases/database-1315548", "isSystem" => false}, "error" => false, "code" => 200}
-
-Create Database demoXYZ-123456789
-{"result":true,"error":false,"code":201}
-{"result" => true, "error" => false, "code" => 201}
-
-Delete Database demoXYZ-123456789
-{"result" => true, "error" => false, "code" => 200}
-
-Create collection demo
-{"id":"59683047","name":"demo","waitForSync":false,"isVolatile":false,"isSystem":false,"status":3,"type":2,"error":false,"code":200}
-{"id" => "59683047", "name" => "demo", "waitForSync" => false, "isVolatile" => false, "isSystem" => false, "status" => 3, "type" => 2, "error" => false, "code" => 200}
+{"error" => false, "code" => 200_i64, "result" => {"name" => "demo3", "id" => "34472968", "path" => "/usr/local/var/lib/arangodb3", "isSystem" => false}}
+All Databases
+{"error" => false, "code" => 200_i64, "result" => ["_system", "airbus", "avenircours", "batitel", "cms_bw", "cms_localhost", "dc", "defy2", "defycards", "demo", "demo2", "demo3", "lgc", "shop", "telegraphe", "test", "thebrane"]}
 
 Insert one document
-[{"_id":"demo/59683050","_key":"59683050","_rev":"_UxElb9y---"},{"_id":"demo/59683054","_key":"59683054","_rev":"_UxElb9y--_"}]
+
+Read all Keys
 
 Run AQL query (cursor)
+100
+{"result" => [{"_key" => "34473018", "_id" => "demo/34473018", "_rev" => "_WYZ1pVS--_", "fn" => "1 Olivier", "ln" => "1 BONNAURE"}, {"_key" => "34473019", "_id" => "demo/34473019", "_rev" => "_WYZ1pVW--_", "fn" => "2 Olivier", "ln" => "2 BONNAURE"}, {"_key" => "34473033", "_id" => "demo/34473033", "_rev" => "_WYZ1pVa--_", "fn" => "14 Olivier", "ln" => "14 BONNAURE"}, {"_key" => "34473053", "_id" => "demo/34473053", "_rev" => "_WYZ1pVe--_", "fn" => "34 Olivier", "ln" => "34 BONNAURE"}, {"_key" => "34473074", "_id" => "demo/34473074", "_rev" => "_WYZ1pVi--_", "fn" => "55 Olivier", "ln" => "55 BONNAURE"}], "hasMore" => false, "cached" => false, "extra" => {"stats" => {"writesExecuted" => 0_i64, "writesIgnored" => 0_i64, "scannedFull" => 5_i64, "scannedIndex" => 0_i64, "filtered" => 0_i64, "httpRequests" => 0_i64, "executionTime" => 0.0006010532379150391}, "warnings" => []}, "error" => false, "code" => 201_i64}
 
-1000 (100 times)
-
-{"result" => [{"_key" => "63378131", "_id" => "demo/63378131", "_rev" => "_UxGeQS2-_K", "fn" => "82202 Olivier", "ln" => "82202 BONNAURE"}, {"_key" => "63393430", "_id" => "demo/63393430", "_rev" => "_UxGeQVy-_R", "fn" => "89851 Olivier", "ln" => "89851 BONNAURE"}, {"_key" => "63270353", "_id" => "demo/63270353", "_rev" => "_UxGeP9S--m", "fn" => "28313 Olivier", "ln" => "28313 BONNAURE"}, {"_key" => "63299611", "_id" => "demo/63299611", "_rev" => "_UxGeQCm--f", "fn" => "42942 Olivier", "ln" => "42942 BONNAURE"}, {"_key" => "63370085", "_id" => "demo/63370085", "_rev" => "_UxGeQRG-_W", "fn" => "78179 Olivier", "ln" => "78179 BONNAURE"}], "hasMore" => false, "cached" => false, "extra" => {"stats" => {"writesExecuted" => 0, "writesIgnored" => 0, "scannedFull" => 5, "scannedIndex" => 0, "filtered" => 0, "executionTime" => 0.00014805793762207029}, "warnings" => []}, "error" => false, "code" => 201}
-
+Transaction
+{"error" => false, "code" => 200_i64, "result" => 101_i64}
 
 Truncate collection demo
-{"id" => "59683047", "name" => "demo", "isSystem" => false, "status" => 3, "type" => 2, "error" => false, "code" => 200}
+{"code" => 200_i64, "error" => false, "type" => 2_i64, "status" => 3_i64, "name" => "demo", "isSystem" => false, "id" => "34473010", "globallyUniqueId" => "h4ACB4C97B13C/34473010"}
 
 Delete collection demo
-{"id" => "59683047", "error" => false, "code" => 200}
+{"code" => 200_i64, "error" => false, "id" => "34473010"}
+
+Delete database
+{"error" => false, "code" => 200_i64, "result" => true}
 ````
 
 ## Todos
