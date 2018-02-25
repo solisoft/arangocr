@@ -5,7 +5,18 @@ class Arango::Collection
 
   getter client
 
-  def initialize(@client, @database : String, @name : String); end
+  def initialize(@client, @database : String, @name : String)
+    infos = status
+    if status["code"] == 404
+      create({"name" => @name})
+    else
+      status
+    end
+  end
+
+  def status
+    @client.get("/_db/#{@database}/_api/#{@name}")
+  end
 
   def create(body : Hash)
     @client.post("/_db/#{@database}/_api/collection", body)

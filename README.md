@@ -4,7 +4,7 @@ This library provides binding for ArangoDB HTTP interface
 
 ## Status
 
-alpha
+v0.1.0
 
 ## Requirements
 
@@ -42,7 +42,6 @@ puts database.delete("demoXYZ-123456789")
 
 demo = database.collection("demo")
 puts "\nCreate collection demo"
-puts demo.create({"name" => "demo"})
 
 puts "\nInsert one document"
 data = [] of Hash(String, String)

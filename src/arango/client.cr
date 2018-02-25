@@ -7,9 +7,9 @@ class Arango::Client
     uri = URI.parse("#{@endpoint}")
     @http = HTTP::Client.new uri
     @async = false
-    response = @http.post_form(
+    response = @http.post(
       "/_open/auth",
-      {"username" => @user, "password" => @password}.to_json
+      body: {"username" => @user, "password" => @password}.to_json
     )
     if response.status_code == 200
       @jwt = JSON.parse(response.body)["jwt"].to_s

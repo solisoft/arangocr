@@ -1,12 +1,13 @@
 require "./src/*"
 
-client = Arango::Client.new("http://127.0.0.1:8529", "root", "", "demo")
+client = Arango::Client.new("http://127.0.0.1:8529", "root", "", "demo3")
 database = client.database
-puts "All Databases"
-puts database.all
 
 puts "\nCurrent Database"
 puts database.current
+
+puts "All Databases"
+puts database.all
 
 puts "\nCreate Database demoXYZ-123456789"
 puts database.create({"name" => "demoXYZ-123456789"})
@@ -20,7 +21,7 @@ puts demo.create({"name" => "demo"})
 
 puts "\nInsert one document"
 data = [] of Hash(String, String)
-(1..100000).each do |i|
+(1..100).each do |i|
   data.push({"fn" => "#{i} Olivier", "ln" => "#{i} BONNAURE"})
 end
 demo.document.create(data)
@@ -42,7 +43,7 @@ end
 puts aql.cursor({"query" => "FOR d IN demo LIMIT 5 RETURN d"})
 
 puts "\nTruncate collection demo"
-# puts demo.truncate
+puts demo.truncate
 
 puts "\nDelete collection demo"
-# puts demo.delete
+puts demo.delete

@@ -5,7 +5,14 @@ class Arango::Database
 
   getter client
 
-  def initialize(@client, @database : String); end
+  def initialize(@client, @database : String)
+    infos = current
+    if current["code"] == 404
+      create({"name" => @database})
+    else
+      current
+    end
+  end
 
   def all
     @client.get("/_db/#{@database}/_api/database/user")
