@@ -7,19 +7,15 @@ class Arango::Collection
 
   def initialize(@client, @database : String, @name : String)
     infos = status
-    if status["code"] == 404
-      create({"name" => @name})
-    else
-      status
-    end
+    infos["code"] == 404 ? create : status
   end
 
   def status
     @client.get("/_db/#{@database}/_api/#{@name}")
   end
 
-  def create(body : Hash)
-    @client.post("/_db/#{@database}/_api/collection", body)
+  protected def create
+    @client.post("/_db/#{@database}/_api/collection", {"name" => @name})
   end
 
   def delete

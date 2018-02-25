@@ -7,11 +7,11 @@ class Arango::Database
 
   def initialize(@client, @database : String)
     infos = current
-    if current["code"] == 404
-      create({"name" => @database})
-    else
-      current
-    end
+    infos["code"] == 404 ? create : infos
+  end
+
+  protected def create
+    @client.post("/_api/database", {"name" => @database})
   end
 
   def all
@@ -22,12 +22,8 @@ class Arango::Database
     @client.get("/_db/#{@database}/_api/database/current")
   end
 
-  def create(body : Hash)
-    @client.post("/_api/database", body)
-  end
-
-  def delete(name : String)
-    @client.delete("/_api/database/#{name}")
+  def delete
+    @client.delete("/_api/database/#{@database}")
   end
 
   def [](name)

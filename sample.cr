@@ -1,7 +1,7 @@
 require "./src/*"
 
-client = Arango::Client.new("http://127.0.0.1:8529", "root", "", "demo3")
-database = client.database
+client = Arango::Client.new("http://127.0.0.1:8529", "root", "")
+database = client.database("demo3")
 
 puts "\nCurrent Database"
 puts database.current
@@ -9,15 +9,7 @@ puts database.current
 puts "All Databases"
 puts database.all
 
-puts "\nCreate Database demoXYZ-123456789"
-puts database.create({"name" => "demoXYZ-123456789"})
-
-puts "\nDelete Database demoXYZ-123456789"
-puts database.delete("demoXYZ-123456789")
-
 demo = database.collection("demo")
-puts "\nCreate collection demo"
-puts demo.create({"name" => "demo"})
 
 puts "\nInsert one document"
 data = [] of Hash(String, String)
@@ -47,3 +39,6 @@ puts demo.truncate
 
 puts "\nDelete collection demo"
 puts demo.delete
+
+puts "\nDelete database"
+puts database.delete

@@ -1,8 +1,7 @@
 class Arango::Client
   setter :async
 
-  def initialize(@endpoint : String, @user : String,
-                 @password : String, @database : String)
+  def initialize(@endpoint : String, @user : String, @password : String)
     @jwt = ""
     uri = URI.parse("#{@endpoint}")
     @http = HTTP::Client.new uri
@@ -20,8 +19,8 @@ class Arango::Client
     end
   end
 
-  def database
-    Database.new(self, @database)
+  def database(name : String)
+    Database.new(self, name)
   end
 
   def get(url : String)
