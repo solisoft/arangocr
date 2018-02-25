@@ -40,4 +40,8 @@ class Arango::Database
   def transaction
     Transaction.new(@client, @database)
   end
+
+  def foxx
+    Foxx.new(@client, @database)
+  end
 end

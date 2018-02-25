@@ -33,8 +33,18 @@ class Arango::Client
     JSON.parse(response.body)
   end
 
+  def post(url : String, body : String)
+    response = @http.post(url, headers: headers, body: body)
+    JSON.parse(response.body)
+  end
+
   def patch(url : String, body : Hash | Array)
     response = @http.patch(url, headers: headers, body: body.to_json)
+    JSON.parse(response.body)
+  end
+
+  def patch(url : String, body : String)
+    response = @http.patch(url, headers: headers, body: body)
     JSON.parse(response.body)
   end
 
@@ -48,8 +58,13 @@ class Arango::Client
     JSON.parse(response.body)
   end
 
-  def put(url : String, body : Hash)
+  def put(url : String, body : Hash | Array)
     response = @http.put(url, headers: headers, body: body.to_json)
+    JSON.parse(response.body)
+  end
+
+  def put(url : String, body : String)
+    response = @http.put(url, headers: headers, body: body)
     JSON.parse(response.body)
   end
 

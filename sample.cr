@@ -11,6 +11,8 @@ puts database.all
 
 demo = database.collection("demo")
 
+puts database.foxx.install("/auth", "/Users/olivier/workspace/demo/foxxy_shop/foxx/_appbundles/auth.zip")
+
 puts "\nInsert one document"
 data = [] of Hash(String, String)
 (1..100).each do |i|
