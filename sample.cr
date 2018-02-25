@@ -10,8 +10,16 @@ puts "All Databases"
 puts database.all
 
 demo = database.collection("demo")
-
+puts "Install Service"
 puts database.foxx.install("/auth", "/Users/olivier/workspace/demo/foxxy_shop/foxx/_appbundles/auth.zip")
+puts "Replace Service"
+puts database.foxx.replace("/auth", "/Users/olivier/workspace/demo/foxxy_shop/foxx/_appbundles/auth.zip")
+puts "Upgrade Service"
+puts database.foxx.upgrade("/auth", "/Users/olivier/workspace/demo/foxxy_shop/foxx/_appbundles/auth.zip")
+puts "Test Service"
+puts database.foxx.test("/auth")
+puts "Uninstall Service"
+puts database.foxx.uninstall("/auth")
 
 puts "\nInsert one document"
 data = [] of Hash(String, String)
