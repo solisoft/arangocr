@@ -6,8 +6,7 @@ class Arango::Collection
   getter client
 
   def initialize(@client, @database : String, @name : String)
-    infos = status
-    infos["code"] == 404 ? create : status
+    create if status["code"] == 404
   end
 
   def status
