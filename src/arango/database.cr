@@ -41,7 +41,4 @@ class Arango::Database
     Transaction.new(@client, @database)
   end
 
-  def foxx
-    Foxx.new(@client, @database)
-  end
 end

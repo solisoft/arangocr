@@ -53,6 +53,10 @@ class Arango::Collection
     @client.get("/_db/#{@database}/_api/collection")
   end
 
+  def all_documents
+    @client.put("/_db/#{@database}/_api/simple/all", { "collection" => @name })
+  end
+
   def all_keys(_type = "path")
     @client.put("/_db/#{@database}/_api/simple/all-keys", {"collection" => @name, "type" => _type})
   end
