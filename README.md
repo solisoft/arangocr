@@ -2,6 +2,9 @@
 
 This library provides binding for ArangoDB HTTP interface
 
+
+[![Build status](https://travis-ci.org/solisoft/arangocr.svg?branch=master)](https://travis-ci.com/)
+
 ## Status
 
 v0.1.0
