@@ -26,6 +26,34 @@ describe Arangocr do
     demo.all_documents["result"].size.should eq 1
   end
 
+  it "Should run AQL query" do
+    aql = database.aql
+    cursor = aql.cursor({
+      "query" => "FOR d IN demo RETURN d",
+      "count" => true
+    })
+    cursor["count"].should eq 1
+  end
+
+  it "Should run AQL query WITH bindVars" do
+    aql = database.aql
+    cursor = aql.cursor({
+      "query" => "FOR d IN demo FILTER d.hello == @val RETURN d",
+      "bindVars" => { val: "world" },
+      "count" => true
+    })
+    cursor["count"].should eq 1
+
+    cursor = aql.cursor({
+      "query" => "FOR d IN demo FILTER d.hello == @val RETURN d",
+      "bindVars" => { val: "you" },
+      "count" => true
+    })
+    cursor["count"].should eq 0
+
+  end
+
+
 
 end
 
