@@ -3,11 +3,11 @@ require "./client"
 class Arango::Transaction
   @client : Arango::Client
 
-  getter client
+  getter client, database
 
   def initialize(@client, @database : String); end
 
   def execute(params : Hash)
-    @client.post("/_db/#{@database}/_api/transaction", params)
+    client.post("/_db/#{database}/_api/transaction", params)
   end
 end

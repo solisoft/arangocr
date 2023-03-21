@@ -1,6 +1,7 @@
 require "./src/*"
 
-client = Arango::Client.new("http://127.0.0.1:8529", "root", "")
+# You need a server running on port 8529 with root & password
+client = Arango::Client.new("http://127.0.0.1:8529", "root", "password")
 database = client.database("demo3")
 
 puts "\nCurrent Database"
@@ -23,7 +24,7 @@ demo.all_keys
 
 puts "\nRun AQL query (cursor)"
 aql = database.aql
-cursor = aql.cursor({"query" => "FOR d IN demo RETURN d"})
+cursor = aql.cursor({ "query" => "FOR d IN demo RETURN d"})
 puts cursor["result"].size
 while (cursor["hasMore"] == true)
   cursor = aql.next(cursor["id"].to_s)
