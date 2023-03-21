@@ -1,11 +1,13 @@
 require "./spec_helper"
 
-client = Arango::Client.new("http://127.0.0.1:8529", "root", "")
+client = Arango::Client.new("http://127.0.0.1:8529", "root", "password")
 database = client.database("test_arangocr")
 
-describe Arangocr do
-  # TODO: Write tests
+Spec.after_suite do
+  database.delete
+end
 
+describe Arangocr do
   it "Should return the right db name" do
     database.current["result"]["name"].should eq("test_arangocr")
   end
@@ -50,11 +52,5 @@ describe Arangocr do
       "count" => true
     })
     cursor["count"].should eq 0
-
   end
-
-
-
 end
-
-database.delete
